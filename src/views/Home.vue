@@ -1,18 +1,34 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <AddItem />
+    <div class="flex flex-col justify-center border-2">
+    <div class="border-2 flex justify-center " v-for="(item, index) in listItems" :key="index">
+      {{  `${item.name} - ${item.quantity} pcs - ${item.price} RON` }}
+      <div class="ml-6">
+      Total: {{ item.price * item.quantity }} RON
+      </div>
+    </div>
+    <CalcTotal />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import AddItem from "../components/AddItem.vue";
+import CalcTotal from "../components/CalcTotal.vue";
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+  AddItem,
+  CalcTotal,
+
+  },
+  computed: {
+    listItems() {
+      return this.$store.getters.listItems;
+    }
   }
 }
 </script>
+
