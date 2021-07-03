@@ -41,13 +41,14 @@ methods: {
 			price: this.itemPrice,
 		}
 		this.$store.dispatch("addedNewCountry", newAddedItem);
+		let element = this.itemQuantity * this.itemPrice;
 		this.itemName = "";
 		this.itemPrice = "";
 		this.itemQuantity = "";
-		//for (let i=0; i < this.listItems.length; i++) {
-		//	const element = this.listItems[i].price * this.listItems[i].quantity;
-		//	this.total = this.total + element;
-		//}
+		this.$store.dispatch('addToTotal', element);
+		console.log(element);
+		element = "";
+		console.log(element);
 	}
 }
 }
