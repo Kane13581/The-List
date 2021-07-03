@@ -2,9 +2,9 @@
 	<div>
 		<div>
 			<form @submit.prevent="addNewItem">
-				<input v-model="itemName" type="text" placeholder="Item Name">
-				<input v-model="itemPrice" type="text" placeholder="Item Price">
-				<input v-model="itemQuantity" type="text" placeholder="Item Quantity">
+				<input v-model="itemName" type="text" placeholder="Item Name" required="required">
+				<input v-model="itemPrice" type="number" placeholder="Item Price" required="required">
+				<input v-model="itemQuantity" type="number" placeholder="Item Quantity" required="required">
 				<button class="border-2 border-yellow-300 rounded-lg p-1">Add Item</button>
 			</form>
 		</div>

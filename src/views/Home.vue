@@ -3,8 +3,17 @@
     <AddItem />
     <div class="flex flex-col justify-center border-2">
     <div class="border-2 flex justify-center " v-for="(item, index) in listItems" :key="index">
-      {{  `${item.name} - ${item.quantity} pcs - ${item.price} RON` }}
-      <div class="ml-6">
+      <div class="border-2 mr-4">
+      {{  item.name }}
+      </div>
+      <div class="border-2 mr-4">
+        {{ item.price }}
+      </div>
+      <div class="border-2 mr-4">
+        {{ item.quantity }}
+      </div>
+
+      <div class="ml-6 border-2 absolute bottom-0">
       Total: {{ item.price * item.quantity }} RON
       </div>
     </div>
@@ -14,8 +23,8 @@
 </template>
 
 <script>
-import AddItem from "../components/AddItem.vue";
 import CalcTotal from "../components/CalcTotal.vue";
+import AddItem from "../components/AddItem.vue";
 
 export default {
   name: 'Home',
