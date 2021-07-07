@@ -15,28 +15,34 @@ export default createStore({
     }
   },
   mutations: {
-    addedNewCountry: (state, newAddedItem) => {
+    addedNewItem: (state, newAddedItem) => {
       state.listItems.unshift(newAddedItem);
     },
-    deleteCountry: (state, indexForDelete, item) => {
+    deleteCountry: (state, indexForDelete) => {
       state.listItems.splice(indexForDelete, 1)
-      let elem2 = item.price * item.quantity;
-      state.total = state.total - elem2; 
+
     },
     addToTotal: (state, element) => {
         state.total = state.total + element;
+    },
+    substractFunc: (state, sumToSubstract) => {
+      state.total = state.total - sumToSubstract;
+      console.log(state.total, sumToSubstract);
     }
   },
   actions: {
-    addedNewCountry(context, newAddedItem) {
-      context.commit('addedNewCountry', newAddedItem)
+    addedNewItem(context, newAddedItem) {
+      context.commit('addedNewItem', newAddedItem)
     },
-    deleteCountry(context, indexForDelete, item) {
-      context.commit('deleteCountry', indexForDelete, item)
+    deleteCountry(context, indexForDelete) {
+      context.commit('deleteCountry', indexForDelete)
     },
     addToTotal(context, element) {
       context.commit('addToTotal', element);
     },
+    substractFunc(context, sumToSubstract) {
+      context.commit("substractFunc", sumToSubstract)
+    }
   },
   modules: {
   }

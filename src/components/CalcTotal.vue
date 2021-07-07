@@ -23,9 +23,9 @@ export default {
 		}
 	},
 	methods: {
-		addToTotal() {
-		this.$store.dispatch('addToTotal');
-		}
+		//addToTotal() {
+		//this.$store.dispatch('addToTotal');
+		//}
 	}
 }
 </script>

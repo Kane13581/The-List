@@ -8,7 +8,7 @@
     <div class="border-2 flex justify-center " v-for="(item, index) in listItems" :key="index">
       <div class="border-2 mr-4">
       {{  item.name }}
-      </div>
+      </div>  
       <div class="border-2 mr-4">
         {{ item.price }}
       </div>
@@ -20,7 +20,7 @@
       Total: {{ item.price * item.quantity }} RON
       </div>
       <div>
-        <button @click="deleteCountry">Delete</button>
+        <button @click="multiFunc(index, item)">Delete</button>
       </div>
     </div>
     <CalcTotal />
@@ -44,6 +44,7 @@ export default {
     return {
       showDeleteModal: false,
       indexForDelete: "",
+      sumToSubstract: 0,
     }
     },
   computed: {
@@ -53,7 +54,9 @@ export default {
   },
   methods: {
     confirmDelete() {
-      this.$store.dispatch("deleteCountry", this.indexForDelete, item);
+      this.$store.dispatch("deleteCountry", this.indexForDelete);
+      this.$store.dispatch("substractFunc", this.sumToSubstract)
+      this.sumToSubstract = 0,
       this.indexForDelete = "";
       this.showDeleteModal = !this.showDeleteModal;
       console.log(this.$store.getters.total);
@@ -61,10 +64,20 @@ export default {
     cancelDelete() {
       this.showDeleteModal = !this.showDeleteModal;
     },
+
+    multiFunc(index, item) {
+        this.deleteCountry(index),
+        this.findItem(item) 
+    },
+
     deleteCountry(index) {
       this.showDeleteModal = !this.showDeleteModal;
       this.indexForDelete = index;
+      console.log(this.indexForDelete);
     },
+    findItem(item) {
+    this.sumToSubstract = item.price * item.quantity
+    }
   }
 }
 </script>

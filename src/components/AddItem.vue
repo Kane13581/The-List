@@ -40,15 +40,14 @@ methods: {
 			quantity: this.itemQuantity,
 			price: this.itemPrice,
 		}
-		this.$store.dispatch("addedNewCountry", newAddedItem);
+		this.$store.dispatch("addedNewItem", newAddedItem);
 		let element = this.itemQuantity * this.itemPrice;
 		this.itemName = "";
 		this.itemPrice = "";
 		this.itemQuantity = "";
 		this.$store.dispatch('addToTotal', element);
-		console.log(element);
 		element = "";
-		console.log(element);
+		console.log(this.listItems);
 	}
 }
 }
