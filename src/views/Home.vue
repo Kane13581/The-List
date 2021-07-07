@@ -1,6 +1,13 @@
 <template>
   <div class="home">
+    <div class="flex justify-center">
+      <Button @toggleAddItem="toggleAddItem" />
+    </div>
+    <div class="border-2 flex justify-center">
+      <div v-if="showAddItem" >
     <AddItem />
+      </div>
+    </div>
     <DeleteModal v-if="showDeleteModal"
         @cancel-delete="cancelDelete"
         @confirm-delete="confirmDelete"/>
@@ -23,7 +30,9 @@
         <button @click="multiFunc(index, item)">Delete</button>
       </div>
     </div>
+    <div class="absolute bottom-2 right-6 font-bold text-2xl">
     <CalcTotal />
+    </div>
     </div>
   </div>
 </template>
@@ -32,6 +41,7 @@
 import CalcTotal from "../components/CalcTotal.vue";
 import AddItem from "../components/AddItem.vue";
 import DeleteModal from "../components/DeleteModal.vue";
+import Button from "../components/Button.vue";
 
 export default {
   name: 'Home',
@@ -39,12 +49,14 @@ export default {
   AddItem,
   CalcTotal,
   DeleteModal,
+  Button,
   },
   data() {
     return {
       showDeleteModal: false,
       indexForDelete: "",
       sumToSubstract: 0,
+      showAddItem: false,
     }
     },
   computed: {
@@ -77,6 +89,9 @@ export default {
     },
     findItem(item) {
     this.sumToSubstract = item.price * item.quantity
+    },
+    toggleAddItem() {
+      this.showAddItem = !this.showAddItem;
     }
   }
 }
