@@ -26,11 +26,14 @@
       <div class="ml-6 border-2">
       Total: {{ item.price * item.quantity }} RON
       </div>
-      <div>
-        <button @click="multiFunc(index, item)">Delete</button>
+      <div class="ml-12 flex">
+        <button @click="multiFunc(index, item)">
+          <img class="w-12 h-9" src="../assets/TrashCan.png">
+        </button>
+        
       </div>
     </div>
-    <div class="absolute bottom-2 right-6 font-bold text-2xl">
+    <div class="absolute bottom-2 right-6 font-bold text-2xl text-yellow-500">
     <CalcTotal />
     </div>
     </div>
@@ -39,7 +42,7 @@
 
 <script>
 import CalcTotal from "../components/CalcTotal.vue";
-import AddItem from "../components/AddItem.vue";
+import AddItem from "../components/AddItem";
 import DeleteModal from "../components/DeleteModal.vue";
 import Button from "../components/Button.vue";
 

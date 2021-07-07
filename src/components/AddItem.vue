@@ -5,7 +5,7 @@
 				<input v-model="itemName" type="text" placeholder="Item Name" required="required">
 				<input v-model="itemPrice" type="number" placeholder="Item Price" required="required">
 				<input v-model="itemQuantity" type="number" placeholder="Item Quantity" required="required">
-				<button class="border-2 border-yellow-300 rounded-lg p-1">Add Item</button>
+				<button class="bg-transparent hover:bg-yellow-500 text-yellow-500 font-semibold hover:text-white px-4 border border-yellow-500 hover:border-transparent rounded">Add Item</button>
 			</form>
 		</div>
 		
