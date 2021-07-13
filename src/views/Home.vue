@@ -3,11 +3,20 @@
     <div class="flex justify-center">
       <Button @toggleAddItem="toggleAddItem" />
     </div>
+    <!--<div v-for="(list, index) in dataLists" :key="index">
+        Item name {{list.name}} 
+        Item price {{list.price}}
+        Item quantity {{list.quantity}}
+    </div>-->
+    <div v-for="(data, index) in newData" :key="index">
+        {{ data.name }}
+    </div>
     <div class="border-2 flex justify-center">
       <div v-if="showAddItem" >
     <AddItem />
       </div>
     </div>
+    <SendData />
     <DeleteModal v-if="showDeleteModal"
         @cancel-delete="cancelDelete"
         @confirm-delete="confirmDelete"/>
@@ -45,6 +54,10 @@ import CalcTotal from "../components/CalcTotal.vue";
 import AddItem from "../components/AddItem";
 import DeleteModal from "../components/DeleteModal.vue";
 import Button from "../components/Button.vue";
+import SendData from '../components/SendData.vue';
+//import axios from 'axios';
+
+//window.axios = require('axios')
 
 export default {
   name: 'Home',
@@ -53,6 +66,7 @@ export default {
   CalcTotal,
   DeleteModal,
   Button,
+  SendData,
   },
   data() {
     return {
@@ -60,12 +74,23 @@ export default {
       indexForDelete: "",
       sumToSubstract: 0,
       showAddItem: false,
+      dataLists: null,
     }
     },
   computed: {
     listItems() {
       return this.$store.getters.listItems;
+    },
+    newData() {
+      return this.$store.getters.newData;
     }
+  },
+  mounted: function () {
+    //axios.get('http://localhost:3000/lists')
+    //  .then(res => this.dataLists = res.data)
+    //  .then(res => console.log(res))
+    //  .catch(err => console.log(err))
+    this.$store.dispatch("getData");
   },
   methods: {
     confirmDelete() {

@@ -1,10 +1,14 @@
+import axios from 'axios';
 import { createStore } from 'vuex'
 import storeItems from './storeItems'
 
+
 export default createStore({
   state: {
-    listItems: storeItems.listItems,
+    //listItems: storeItems.listItems,
+    listItems: [],
     total: 0,
+    newData: [],
   },
   getters: {
     listItems: (state) => {
@@ -12,6 +16,9 @@ export default createStore({
     },
     total: (state) => {
       return state.total;
+    },
+    newData: (state) => {
+      return state.newData;
     }
   },
   mutations: {
@@ -20,7 +27,6 @@ export default createStore({
     },
     deleteCountry: (state, indexForDelete) => {
       state.listItems.splice(indexForDelete, 1)
-
     },
     addToTotal: (state, element) => {
         state.total = state.total + element;
@@ -28,6 +34,10 @@ export default createStore({
     substractFunc: (state, sumToSubstract) => {
       state.total = state.total - sumToSubstract;
       console.log(state.total, sumToSubstract);
+    },
+    setData(state, dataLists) {
+      state.listItems = dataLists
+      console.log(dataLists);
     }
   },
   actions: {
@@ -42,6 +52,10 @@ export default createStore({
     },
     substractFunc(context, sumToSubstract) {
       context.commit("substractFunc", sumToSubstract)
+    },
+    getData({commit}) {
+      axios.get('http://localhost:3000/lists')
+      .then(res => commit('setData', res.data))
     }
   },
   modules: {

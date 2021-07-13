@@ -13,6 +13,8 @@
 </template>
 
 <script>
+
+
 export default {
 name: "AddItem",
 data() {
@@ -26,7 +28,7 @@ data() {
 },
 
 methods: {
-	addNewItem() {
+	 addNewItem() {
 		const newAddedItem = {
 			id: this.$store.getters.listItems.length + 1,
 			name: this.itemName,
@@ -41,7 +43,8 @@ methods: {
 		this.$store.dispatch('addToTotal', element);
 		element = "";
 		console.log(this.listItems);
-	}
+	},
+	
 }
 }
 </script>
