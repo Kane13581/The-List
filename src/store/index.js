@@ -9,6 +9,7 @@ export default createStore({
     listItems: [],
     total: 0,
     newData: [],
+    newTotal: 0,
   },
   getters: {
     listItems: (state) => {
@@ -35,9 +36,13 @@ export default createStore({
       state.total = state.total - sumToSubstract;
       console.log(state.total, sumToSubstract);
     },
-    setData(state, dataLists) {
+    setData(state, dataLists) { //res.data = dataLists
       state.listItems = dataLists
       console.log(dataLists);
+      for(let i=0;i<dataLists.length;i++) {
+        state.total = state.total + dataLists[i].price * dataLists[i].quantity
+        console.log(dataLists[i].price);
+      }
     }
   },
   actions: {
@@ -56,7 +61,7 @@ export default createStore({
     getData({commit}) {
       axios.get('http://localhost:3000/lists')
       .then(res => commit('setData', res.data))
-    }
+    },
   },
   modules: {
   }

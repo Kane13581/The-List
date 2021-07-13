@@ -13,7 +13,9 @@
 </template>
 
 <script>
+import axios from 'axios';
 
+const baseURL = "http://localhost:3000/lists/";
 
 export default {
 name: "AddItem",
@@ -28,13 +30,14 @@ data() {
 },
 
 methods: {
-	 addNewItem() {
+	async addNewItem() {
 		const newAddedItem = {
-			id: this.$store.getters.listItems.length + 1,
 			name: this.itemName,
 			quantity: this.itemQuantity,
-			price: this.itemPrice,
-		}
+			price: this.itemPrice,}
+		const headers = {'Content-Type': 'application/json'}
+		const response = await axios.post(baseURL, newAddedItem, headers, )
+				console.log(response);
 		this.$store.dispatch("addedNewItem", newAddedItem);
 		let element = this.itemQuantity * this.itemPrice;
 		this.itemName = "";

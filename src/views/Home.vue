@@ -16,7 +16,6 @@
     <AddItem />
       </div>
     </div>
-    <SendData />
     <DeleteModal v-if="showDeleteModal"
         @cancel-delete="cancelDelete"
         @confirm-delete="confirmDelete"/>
@@ -54,7 +53,6 @@ import CalcTotal from "../components/CalcTotal.vue";
 import AddItem from "../components/AddItem";
 import DeleteModal from "../components/DeleteModal.vue";
 import Button from "../components/Button.vue";
-import SendData from '../components/SendData.vue';
 //import axios from 'axios';
 
 //window.axios = require('axios')
@@ -66,7 +64,6 @@ export default {
   CalcTotal,
   DeleteModal,
   Button,
-  SendData,
   },
   data() {
     return {
@@ -86,10 +83,6 @@ export default {
     }
   },
   mounted: function () {
-    //axios.get('http://localhost:3000/lists')
-    //  .then(res => this.dataLists = res.data)
-    //  .then(res => console.log(res))
-    //  .catch(err => console.log(err))
     this.$store.dispatch("getData");
   },
   methods: {
