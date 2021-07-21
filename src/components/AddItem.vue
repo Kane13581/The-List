@@ -34,10 +34,11 @@ methods: {
 		const newAddedItem = {
 			name: this.itemName,
 			quantity: this.itemQuantity,
-			price: this.itemPrice,}
+			price: this.itemPrice
+			}
 		const headers = {'Content-Type': 'application/json'}
-		const response = await axios.post(baseURL, newAddedItem, headers, )
-				console.log(response);
+		const response = await axios.post(baseURL, newAddedItem, headers)
+		console.log(response);
 		this.$store.dispatch("addedNewItem", newAddedItem);
 		let element = this.itemQuantity * this.itemPrice;
 		this.itemName = "";

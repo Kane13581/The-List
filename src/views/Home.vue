@@ -20,7 +20,7 @@
         @cancel-delete="cancelDelete"
         @confirm-delete="confirmDelete"/>
     <div class="flex flex-col justify-center border-2">
-    <div class="border-2 flex justify-center " v-for="(item, index) in listItems" :key="index">
+    <div class="border-2 flex justify-center" v-for="(item, index) in listItems" :key="index">
       <div class="border-2 mr-4">
       {{  item.name }}
       </div>  
@@ -53,9 +53,11 @@ import CalcTotal from "../components/CalcTotal.vue";
 import AddItem from "../components/AddItem";
 import DeleteModal from "../components/DeleteModal.vue";
 import Button from "../components/Button.vue";
-//import axios from 'axios';
+import axios from 'axios';
 
 //window.axios = require('axios')
+
+const baseURL = "http://localhost:3000/lists/";
 
 export default {
   name: 'Home',
@@ -69,6 +71,7 @@ export default {
     return {
       showDeleteModal: false,
       indexForDelete: "",
+      idForDelete: null,
       sumToSubstract: 0,
       showAddItem: false,
       dataLists: null,
@@ -86,7 +89,11 @@ export default {
     this.$store.dispatch("getData");
   },
   methods: {
-    confirmDelete() {
+    async confirmDelete() {
+    const headers = {'Content-Type': 'application/json'}
+		const response = await axios.delete("http://localhost:3000/lists/" + this.idForDelete, headers)
+		console.log(response);
+
       this.$store.dispatch("deleteCountry", this.indexForDelete);
       this.$store.dispatch("substractFunc", this.sumToSubstract)
       this.sumToSubstract = 0,
@@ -110,6 +117,9 @@ export default {
     },
     findItem(item) {
     this.sumToSubstract = item.price * item.quantity
+    console.log(item._id);
+    this.idForDelete = item._id;
+    console.log(this.idForDelete);
     },
     toggleAddItem() {
       this.showAddItem = !this.showAddItem;
