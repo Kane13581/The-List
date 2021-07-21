@@ -57,7 +57,6 @@ import axios from 'axios';
 
 //window.axios = require('axios')
 
-const baseURL = "http://localhost:3000/lists/";
 
 export default {
   name: 'Home',
@@ -91,8 +90,10 @@ export default {
   methods: {
     async confirmDelete() {
     const headers = {'Content-Type': 'application/json'}
-		const response = await axios.delete("http://localhost:3000/lists/" + this.idForDelete, headers)
-		console.log(response);
+		await axios.delete("http://localhost:3000/lists/" + this.idForDelete, headers)
+    
+    .then(response => {
+      console.log(response);
 
       this.$store.dispatch("deleteCountry", this.indexForDelete);
       this.$store.dispatch("substractFunc", this.sumToSubstract)
@@ -100,6 +101,11 @@ export default {
       this.indexForDelete = "";
       this.showDeleteModal = !this.showDeleteModal;
       console.log(this.$store.getters.total);
+    })    
+
+    .catch(error => {
+      console.log(error);
+    })
     },
     cancelDelete() {
       this.showDeleteModal = !this.showDeleteModal;
@@ -117,9 +123,7 @@ export default {
     },
     findItem(item) {
     this.sumToSubstract = item.price * item.quantity
-    console.log(item._id);
     this.idForDelete = item._id;
-    console.log(this.idForDelete);
     },
     toggleAddItem() {
       this.showAddItem = !this.showAddItem;
